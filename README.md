@@ -7,8 +7,8 @@
 
 ---
 
-* 1. oslo とは？
-* 2. oslo.messaging の概要
+* 1. [oslo とは？](https://github.com/userlocalhost2000/draft-codezine-oslo.messaging/tree/master/chapter1)
+* 2. [oslo.messaging の概要](https://github.com/userlocalhost2000/draft-codezine-oslo.messaging/tree/master/chapter2)
 * 3. oslo.messaging の環境構築方法
 * 4. oslo.messaging を使ったRPC 処理の実装
     * 4-1. 実装 (RabbitMQ 編)
