@@ -49,7 +49,7 @@
 
 　それでは、実際にこれらを実行してみます。次のようにターミナルからサーバスクリプト `src/server.py` を実行し、次の別のターミナルを開いてクライアントスクリプト `src/client.py` を実行してみてください。  
 
-![実行結果](https://gist.github.com/userlocalhost2000/627c0f16516fb9a351b68a494751128c/raw/e1d8bde469f70cdfdf728bb04743a5bc22ccb9d2/execution_result.png)
+![実行結果](https://github.com/userlocalhost2000/draft-oslo.messaging/blob/master/img/execution_result.png?raw=true)
 (左：クライアント、右：サーバ)  
 
 　クライアント側からの呼び出しでサーバ側で定義したエンドポイント hoge() が呼び出され、クライアント側で実行結果が受け取られていることが確認できました。  

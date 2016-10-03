@@ -25,7 +25,7 @@ vagrant@vagrant:~$ sudo pip install pyzmq redis
 
 　そこで oslo.messaging の `ZeroMQ` ドライバでは、`Matchmaker` という仕組みによってこの問題に対処しています。以下は `Matchmaker` を利用した RPC Server/Client のアーキテクチャと処理の流れを表した図になります。`Matchmaker` は RPC サーバのホスト情報を保持するハッシュテーブルを持っており、RPC サーバが起動した際に `Matchmaker` を通してホスト名とポート番号が登録されます。RPC クライアントは `Matchmaker` を通じてこの情報を参照することで、動的なホストの追加 (あるいは削除) に対応することができます。  
 
-![architecture using Matchmaker](https://gist.github.com/userlocalhost2000/627c0f16516fb9a351b68a494751128c/raw/bcb8425917b514edf47fe64a6ed9d126a9503901/zeromq-driver-architecture.png)
+![architecture using Matchmaker](https://github.com/userlocalhost2000/draft-oslo.messaging/blob/master/img/zeromq-driver-architecture.png?raw=true)
 
 　また `Matchmaker` 自体が `Pluggable` な構造になっており、多様なデータストアに対応可能な構造になっていますが、本稿執筆時点で利用可能なプラグインは `Redis` 向けのものしかないため、ここでは `Redis` サーバと `Redis` にアクセスするための Python ライブラリパッケージをインストールしています。  
 
