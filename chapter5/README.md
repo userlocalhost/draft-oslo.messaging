@@ -8,3 +8,8 @@
 
 　ここでは各サービスが RPC API を提供し連携して、一つの EC サービスを提供していると仮定します。ここで、各サービスが利用履歴や検索キーワードなどの統計情報を集積したい場合に Notification 機能が役に立ちます。また各通知に対して、細かくフィルタ設定をおこなうことができるため、様々な粒度での通知処理をおこなう仕組みを提供できます。  
 　それではサンプルを通じて、通知処理の実装方法について解説して行きます。  
+
+---
+
+* 5-1. [実装](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter5/chapter5-1)
+* 5-2. [OpenStack (Ceilometer) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter5/chapter5-2)
