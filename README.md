@@ -11,10 +11,10 @@
 * 2. [oslo.messaging の概要](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter2)
 * 3. [oslo.messaging の環境構築方法](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter3)
 * 4. [oslo.messaging を使ったRPC 処理の実装](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4)
-    * [4-1. 実装 (RabbitMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-1)
-    * [4-2. 実装 (ZeroMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-2)
-    * [4-3. OpenStack (Nova) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-3)
-* 5. oslo.messaging を使った通知処理の実装
-    * 5-1. 実装
-    * 5-2. OpenStack (Ceilometer) の利用例
+    * 4-1. [実装 (RabbitMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-1)
+    * 4-2. [実装 (ZeroMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-2)
+    * 4-3. [OpenStack (Nova) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-3)
+* 5. [oslo.messaging を使った通知処理の実装](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter5)
+    * 5-1. [実装](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter5/chapter5-1)
+    * 5-2. [OpenStack (Ceilometer) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter5/chapter5-2)
 * 6. その他の oslo プロジェクト

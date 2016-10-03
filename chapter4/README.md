@@ -14,6 +14,6 @@
 
 ---
 
-* [4-1. 実装 (RabbitMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-1)
-* [4-2. 実装 (ZeroMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-2)
-* [4-3. OpenStack (Nova) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-3)
+* 4-1. [実装 (RabbitMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-1)
+* 4-2. [実装 (ZeroMQ 編)](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-2)
+* 4-3. [OpenStack (Nova) の利用例](https://github.com/userlocalhost2000/draft-oslo.messaging/tree/master/chapter4/chapter4-3)
