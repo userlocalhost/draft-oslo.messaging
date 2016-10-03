@@ -1,6 +1,6 @@
 ### 実装
 #### クライアント実装
-　まずはクライアントの実装について解説します。以下に、クライアント処理を抜粋します。  
+　まずはクライアントの実装について解説します。oslo.messaging では、通知を送る主体のことを [通知人(Notifier)](http://docs.openstack.org/developer/oslo.messaging/notifier.html) と呼んでいますが、ここでは便宜上 'クライアント' という名称で解説します。以下に、クライアント処理を抜粋します。  
 
 ```Python
 class NotifyClient(object):
@@ -24,11 +24,11 @@ class NotifyClient(object):
 | event-type  | string | 通知名を表す文字列                                                                                 |
 | payload     | dict   | 通知の詳細情報を表すデータ構造                                                                     |
 
-　`context` と `payload` パラメータはそれぞれ同じ型ですが、OpenStack においては `context` パラメータにはデータを `oslo.context` の `ReqeustContext` オブジェクトでラッピングした値を設定する傾向にあります。というのも、先述した `oslo.messaging` の RPC 機能は基本的にコンポーネント内のサービス間通信で利用されているのに対して、通知機能は別のコンポーネントから参照される場合があります。そのため `context` メンバのデータ構造を共通化させることで、様々なコンポーネントから送信された通知を共通のアルゴリズムで処理することができます。  
+　`context` と `payload` パラメータはそれぞれ同じ型ですが、OpenStack においては `context` パラメータにはデータを `oslo.context` の `ReqeustContext` オブジェクトでラッピングした値を設定する傾向にあります。というのも、先述した `oslo.messaging` の RPC 機能は基本的にコンポーネント内のサービス間通信で利用されているのに対して、通知機能は別のコンポーネントから参照される場合があるため、`oslo.context` を利用してデータ構造を共通化させています。こうすることで、様々なコンポーネントから送信された通知を共通のアルゴリズムで処理することができます。  
 　サンプルプログラムでは説明の都合上 `oslo.context` を使わずに `dict` 型の値を指定しています。  
 
 #### サーバ実装
-　次にサーバの実装について解説します。以下は、サーバ処理の抜粋になります。  
+　次にサーバの実装について解説します。oslo.messaging では、通知を取得する主体のことを [通知リスナ (Notification Listener)](http://docs.openstack.org/developer/oslo.messaging/notification_listener.html) と呼んでいますが、ここでは便宜上 'サーバ' という名称で解説します。以下は、サーバ処理の抜粋になります。  
 
 ```Python
 def start_server(endpoints=[], topic='test_topic', url=''):
@@ -42,7 +42,7 @@ def start_server(endpoints=[], topic='test_topic', url=''):
 ```
 
 　こちらも `rpc_server` と同様に `transport` 及び `target` オブジェクトを用意し、サーバオブジェクトを生成して起動させます。このとき、RPC サーバを生成する場合には `oslo.messaging.get_rpc_server` を呼び出しましたが、通知を受け取るサーバの場合には `oslo_messaging.get_notification_listener` を呼び出します。  
-　サーバ側では、RPC 同様に通知を受け取るエンドポイントを定義し、設定してやります。ただし RPC の場合と異なり、エンドポイントにおいて値の返却は行いません。以下にエンドポイントの定義を抜粋します。  
+　サーバ側では、RPC 同様に通知を受け取るエンドポイントを定義し、サーバに設定します。ただし RPC の場合と異なり、エンドポイントにおいて値の返却は行いません。以下にエンドポイントの定義を抜粋します。  
 
 ```
 class HogeEndpoint(object):

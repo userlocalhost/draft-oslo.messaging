@@ -33,5 +33,4 @@ vagrant@vagrant:~$ sudo pip install oslo.messaging
 vagrant@vagrant:~$ wget https://github.com/userlocalhost2000/oslo-messaging-examples/archive/master.zip
 vagrant@vagrant:~$ unzip master.zip -d examples 
 ```
-　以上で、oslo.messaging を動かす環境が整いました。以降では、oslo.messaging がどのように使われており、またどのように使うかについてサンプルを用いて解説してゆきます。  
-
+　以上で、oslo.messaging を動かす環境が整いました。以降では、oslo.messaging がどのように使われており、またどのように使うかについてサンプルを用いて解説して行きます。  

@@ -5,7 +5,7 @@
 ![内部アーキテクチャ](http://tsuchinoko.dmmlabs.com/wp-content/uploads/2016/08/structure.png)
 (出典：[ツチノコブログ](http://tsuchinoko.dmmlabs.com/?p=4371))  
 
-　クライアント側では RPCClient オブジェクトがユーザアプリケーションに対して、RPC 処理の仕組みを提供します。また Transport オブジェクトが、RabbitMQ や Kafka , ZeroMQ などの各種 MOM を抽象化し、ユーザは RPCClient が提供するインターフェイスを通して MOM 非依存な RPC リクエストをサーバに送ることができます。  
+　クライアント側では RPCClient オブジェクトがユーザアプリケーションに対して、RPC 処理の仕組みを提供します。また Transport オブジェクトが、RabbitMQ や Kafka , ZeroMQ などの各種 MQ システムを抽象化し、ユーザは RPCClient が提供するインターフェイスを通して MQ 非依存な RPC リクエストをサーバに送ることができます。  
 　サーバ側では、ユーザからの RPC 要求を処理する Server オブジェクトを生成します。その際、ユーザ側で各 PRC 要求に対応する処理 (Endpoint) を一つ以上実装してやり、それらを Server オブジェクト生成時に指定します。  
 　また Server 及び Endpoint(s) に対して RPC API の名前空間と互換 version について設定することができます。これらの設定を保持したものが Target オブジェクトになり Server 及び Endpoint にひも付きます。  
 　Endpoint オブジェクトにおいて Target を省略した場合には、グローバルな名前空間と version1.0 が暗黙的に設定されます。ただし Server オブジェクトにおいては Target オブジェクトを topic 及び server パラメータ付きで指定しなければなりません。  

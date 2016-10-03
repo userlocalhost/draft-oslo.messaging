@@ -2,7 +2,7 @@
 　oslo.messaging の使い方について見て行く前に、oslo.messaging についての理解を深めるため、なぜこの仕組みを使うのかについて考えてみたいと思います。  
 　MQ を利用した通知や RPC の仕組みは、もちろん oslo.messaging が登場する以前から存在していました。RabbitMQ を使う場合には [Pika](https://github.com/pika/pika) という AMQP ライブラリを用いてそれらの処理を行なうことができます。また ZeroMQ を使う場合には、[PyZMQ](https://github.com/zeromq/pyzmq) ライブラリを用い、[Kafka](http://kafka.apache.org/) にも [同様の Python ライブラリ](http://zeromq.org/) が存在します。  
   
-　しかしこれらを用いることによって、ミドルウェアないはプロトコル依存の実装になってしまいます。例えば MQ に `RabbitMQ` を使っていて、`Kafka` に切り替えたいと思った際、上記のような特定の MQ 用のライブラリを利用していた場合、それなりの規模のコード修正が必要になると思います。  
+　しかしこれらを用いることによって、ミドルウェアないしはプロトコル依存の実装になってしまいます。例えば MQ に `RabbitMQ` を使っていて、`Kafka` に切り替えたいと思った場合、アプリケーションにそれなりの規模のコード修正が必要になると思います。  
 
 ![picture1](https://github.com/userlocalhost2000/draft-codezine-oslo.messaging/blob/master/img/picture1.png?raw=true)
 
