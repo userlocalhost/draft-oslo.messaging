@@ -15,7 +15,7 @@
   
 　まずは RPC のユースケースにを見て行きます。以下は Nova コンポーネント内部における oslo.messaging による RPC の参照関係を表した図になります。nova-network, nova-conductor, nova-scheduler, そして nova-compute のサービスプロセスにおいて RPC サーバが起動しており、実線で結ばれたサービスプロセス間で RPC が行われています。  
   
-![RPC relationship in Nova](http://docs.openstack.org/developer/nova/_images/architecture.svg)  
+![RPC relationship in Nova](https://github.com/userlocalhost2000/draft-oslo.messaging/blob/master/img/nova-rpc-usecase.png?raw=true)  
 出典：[Nova System Architecture](http://docs.openstack.org/developer/nova/architecture.html)  
   
 　続いて REST API のユースケースを見て行きます。冒頭で示した OpenStack のアーキテクチャの図において、各コンポーネントがそれぞれ REST API のリクエストを処理するサーバプロセス (API サーバ) を持っていることがわかります。コンポーネント間のやりとりは全て API サーバを介して行われています。図中の太線で示されたサービスプロセスが API サーバになります。  
