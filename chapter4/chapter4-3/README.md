@@ -9,7 +9,7 @@
 ![OpenStack のアーキテクチャ](http://docs.openstack.org/admin-guide/_images/openstack-arch-kilo-logical-v1.png)  
 出典：[OpenStack Docs/Logical architecture](http://docs.openstack.org/admin-guide/common/get-started-logical-architecture.html)  
 
-　そして各コンポーネント内部には、実線の角丸の四角形で囲まれた複数の "サービスプロセス" が動作しています。図中の上段中央のコンポーネント "OpenStack Orchestration" において、"heat-api" と "heat-api-cfn"、そして "heat-engine" がサービスプロセスを表しています。  
+　そして各コンポーネント内部には、実線の角丸の四角形で囲まれた複数の "サービスプロセス" が動作しています。図中の上段中央のコンポーネント "OpenStack Orchestration" において、"heat-api" と "heat-api-cfn"、そして "heat-engine" がそれぞれサービスプロセスを表しています。  
 
 　以降ではこれら "コンポーネント" と "サービスプロセス" において、RPC と REST API をどのように使い分けているかについて見て行きます。  
   
@@ -18,7 +18,7 @@
 ![RPC relationship in Nova](https://github.com/userlocalhost2000/draft-oslo.messaging/blob/master/img/nova-rpc-usecase.png?raw=true)  
 出典：[Nova System Architecture](http://docs.openstack.org/developer/nova/architecture.html)  
   
-　続いて REST API のユースケースを見て行きます。冒頭で示した OpenStack のアーキテクチャの図において、各コンポーネントがそれぞれ REST API のリクエストを処理するサーバプロセス (API サーバ) を持っていることがわかります。コンポーネント間のやりとりは全て API サーバを介して行われています。図中の太線で示されたサービスプロセスが API サーバになります。  
+　続いて REST API のユースケースを見て行きます。冒頭で示した OpenStack のアーキテクチャの図において、各コンポーネントがそれぞれ REST API のリクエストを処理するサービスプロセス (API サーバ) を持っていることがわかります。コンポーネント間のやりとりは全て API サーバを介して行われています。図中の太線で示されたサービスプロセスが API サーバになります。  
   
 　このように OpenStack では、コンポーネント間の通信には REST API を利用し、コンポーネント内の通信には RPC を利用するといった使い分けをしています。  
 　こうした使い分けはとても合理的に思えます。なぜならば、もし OpenStack がコンポーネント間の通信も RPC で行う設計になっていたとしたらどうなるか想像してみてください。ある RPC サーバに登録されているメソッドが全てのコンポーネントから参照され、あるコンポーネントのたった一つのインターフェイスの変更が OpenStack 全体に波及することになります。その場合 OpenStack ほど大規模なシステムの維持が途端に難しくなることがわかります。  

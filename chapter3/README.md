@@ -1,6 +1,6 @@
 ## oslo.messaging の環境構築方法
 　この後の解説で実際に oslo.messaging のサンプルを動かすため、ここで実行環境を構築します。ここでは vagrant で構築した Ubuntu16.04 環境に oslo.messaging の実行環境を構築する方法を紹介します。  
-　vagrant のインストール方法につきましては、[過去の記事](http://codezine.jp/article/detail/8255?p=2) で詳しく解説されておりますので、そちらをご参照ください。ここでは、以下の通り VirtualBox と vagrant が読者の環境にインストールされた状態から解説をはじめます。  
+　vagrant のインストール方法につきましては、[過去の記事](http://codezine.jp/article/detail/8255?p=2) で詳しく解説されておりますので、そちらをご参照ください。ここでは、以下の通り VirtualBox と vagrant が皆さんの環境にインストールされた状態から解説をはじめます。  
 ``` 
 $ VBoxManage --version
 5.0.26r108824
