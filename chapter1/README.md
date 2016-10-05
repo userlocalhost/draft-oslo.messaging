@@ -8,4 +8,4 @@
 　例えば oslo.config は、設定ファイルとコマンドライン引数の解析を行なうライブラリとして広く知られており、[SDN Framework Ryu](https://osrg.github.io/ryu/) などで採用されています。  
 　他にもロギング処理全般を行う [olso.log](http://docs.openstack.org/developer/oslo.log/) や CLI フレームワークの [cliff](http://docs.openstack.org/developer/cliff/) などが有名で、[OpenStack ユーザ会のメンバーによる解説](http://www.slideshare.net/h-saito/openstack-oslo-cliff) などもあります。  
 
-　本稿で取り上げる oslo.messaging は、[RabbitMQ](rabbitmq.com) や [ZeroMQ](http://zeromq.org/) などの MQ システムを介した通知や RPC の仕組みを提供します。  
+　本稿で取り上げる oslo.messaging は、[RabbitMQ](rabbitmq.com) や [ZeroMQ](http://zeromq.org/) などの MQ システムを介した通知や RPC の仕組みを提供します。以降で oslo.messaging とその使い方について詳しく解説して行きます。  

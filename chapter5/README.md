@@ -6,7 +6,7 @@
 
 ![Notification use-case](https://github.com/userlocalhost2000/draft-oslo.messaging/blob/master/img/notification-usecase.png?raw=true)
 
-　ここでは各サービスが提供する RPC API を通して連携して一つの EC サービスを提供していると仮定します。通知機能は、各サービスが利用履歴や検索キーワードなどの統計情報を集積したい場合に役立ちます。  
+　ここでは各サービスが提供する RPC API を通してサービス同士が連携し、一つの EC サービスを提供していると仮定します。通知機能は、各サービスが利用履歴や検索キーワードなどの統計情報を集積したい場合に役立ちます。  
 　それではサンプルを通じて、通知処理の実装方法について解説して行きます。  
 
 ---

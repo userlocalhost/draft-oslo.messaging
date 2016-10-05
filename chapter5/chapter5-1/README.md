@@ -23,7 +23,7 @@
 | event-type  | string | 通知名を表す文字列                                                                                 |
 | payload     | dict   | 通知の詳細情報を表すデータ構造                                                                     |
 
-　`context` と `payload` パラメータはそれぞれ同じ型ですが、OpenStack においては `context` パラメータには、データを `oslo.context` の `ReqeustContext` オブジェクトでラッピングした値を設定する傾向があります。というのも、先述した `oslo.messaging` の RPC 機能は基本的にコンポーネント内のサービス間通信で利用されているのに対して、通知機能は別のコンポーネントから参照される場合があるため、`oslo.context` を利用してデータ構造を共通化させています。こうすることで、様々なコンポーネントから送信された通知を共通のアルゴリズムで処理することができます。ただサンプルプログラムでは説明の都合上 `oslo.context` を使わず、単に Python 組み込み型 `dict` の値を指定しています。  
+　`context` と `payload` パラメータはそれぞれ同じ型ですが、OpenStack においては `context` パラメータには、データを `oslo.context` の `ReqeustContext` オブジェクトでラッピングした値を設定する傾向があります。というのも、先述した `oslo.messaging` の RPC 機能は基本的にコンポーネント内のサービス間通信で利用されているのに対して、通知機能は別のコンポーネントから参照される場合があるため、`oslo.context` を利用してデータ構造を共通化させています。こうすることで、様々なコンポーネントから送信された通知を共通のアルゴリズムで処理することができます。ただサンプルプログラムでは説明の都合上 `oslo.context` を使わず、単に dict 型の値を指定しています。  
 
 #### サーバ実装
 　次にサーバの実装について解説します。oslo.messaging では、通知を取得する主体のことを [通知リスナ (Notification Listener)](http://docs.openstack.org/developer/oslo.messaging/notification_listener.html) と呼んでいますが、ここでは便宜上 'サーバ' と呼びます。以下は、サーバ処理の抜粋になります。  
@@ -39,8 +39,8 @@
     33	        server.wait()
 ```
 
-　29 行目で `get_notification_lister` メソッドの呼び出しでサーバオブジェクトを生成し、その際に 27~28 行目で生成した Transport オブジェクトと Target オブジェクトを紐付けます。
-　サーバ側では、RPC 同様に通知を受け取るエンドポイントを定義しサーバオブジェクトに紐付けます。RPC の場合と異なり、通知のエンドポイントは値の返却は行いません。以下にエンドポイントの定義を抜粋します。  
+　29 行目で `get_notification_lister` メソッドの呼び出しでサーバオブジェクトを生成し、その際に 27~28 行目で生成した Transport オブジェクトと Target オブジェクトをひも付けます。  
+　サーバ側では RPC 同様に通知を受け取るエンドポイントを定義し、サーバオブジェクトにひも付けます。RPC の場合と異なり、通知のエンドポイントはクライアントに値を返却しません。以下にエンドポイントの定義を抜粋します。  
 
 ```Python
      6	class HogeEndpoint(object):
@@ -102,12 +102,12 @@ vagrant@vagrant:~/oslo-messaging-examples$ src/notifier_client.py
 [FugaEndpoint] metadata: {'timestamp': u'2016-09-26 09:09:50.150497', 'message_id': u'187c4cd7-3102-48c9-b712-fa05ff67b306'}
 ```
 
-　`HogeEndpoint` が 1 度しかよばれていないのに対して、`FugaEndpoint` が 2 回呼ばれています。これは `HogeEndpoint` に設定したフィルタ ([NotificationFilter](https://specs.openstack.org/openstack/oslo-specs/specs/kilo/notification-dispatcher-filter.html)) によるものになります。以下に `HogeEndpoint` で設定されているフィルタの設定値を改めて以下に抜粋します。  
+　`HogeEndpoint` が 1 度しかよばれていないのに対して、`FugaEndpoint` が 2 回呼ばれています。これは `HogeEndpoint` に設定したフィルタ ([NotificationFilter](https://specs.openstack.org/openstack/oslo-specs/specs/kilo/notification-dispatcher-filter.html)) によるものです。以下に `HogeEndpoint` で設定されているフィルタの設定値を改めて以下に抜粋します。  
 
-```
+```Python
      6	class HogeEndpoint(object):
      7	    filter_rule = oslo_messaging.NotificationFilter(event_type='event-hoge')
 ```
 
-　`HogeEndpoint` では、送られてくる通知のうち `event_type` パラメータに `event-hoge` という値が設定されている通知のみを受け取るようにフィルタの設定を行っています。サンプルコードでは、フィルタの設定値に完全一致の文字列を指定しましたが、NotificationFilter 内部のフィルタリング処理では正規表現によるマッチング処理をおこなうため `event_type` パラメータに '.*-hoge' と指定しても同様の結果が得られます。更に NotificationFilter では event_type パラメータだけでなく、通知の全てのパラメータ (`context`, `publisher_id`, `event_type`, `payload`, `metadata`) に対して同様のフィルタルールを設定できます。  
+　`HogeEndpoint` では、送られてくる通知のうち `event_type` パラメータに `event-hoge` という値が設定されている通知のみを受け取るようフィルタ設定を行っています。サンプルコードでは、フィルタの設定値に完全一致の文字列を指定しましたが、NotificationFilter 内部のフィルタリング処理では正規表現によるマッチング処理を行うため `event_type` パラメータに '.*-hoge' と指定しても同様の結果が得られます。更に NotificationFilter では event_type パラメータだけでなく、通知の全てのパラメータ (`context`, `publisher_id`, `event_type`, `payload`, `metadata`) に対して同様のフィルタルールを設定できます。  
 　設定したフィルタは、各エンドポイントクラス (`HogeEndpoint` や `FugaEndpoint`) のクラス変数 `filter_rule` に設定することで oslo.messaging から参照されます。`filter_rule` が設定されていない場合、当該エンドポイントは (`FugaEndpoint` のように) 全ての通知を受け付けます。  
