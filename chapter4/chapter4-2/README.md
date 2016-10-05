@@ -4,10 +4,20 @@
 　oslo.messaging で利用可能な MQ は `RabbitMQ` の他に `Kafka` や `ZeroMQ` などがありますが、デフォルトで選択される `RabbitMQ` が一般的に利用されており `ZeroMQ` などのサブドライバが利用しているパッケージは oslo.messaging の依存パッケージに含まれていません。そのため、`ZeroMQ` ドライバの依存パッケージを別途インストールしてやる必要があります。  
 　以下では `ZeroMQ` ドライバを利用する上で必要な `ZeroMQ` の Python ライブラリ、及び `Redis` サーバとライブラリをインストールしています。  
 ```
-vagrant@vagrant:~$ sudo apt-get install -y redis-server
+vagrant@vagrant:~$ sudo apt-get install -y redis-server libzmq-dev
 ```
 ```
 vagrant@vagrant:~$ sudo pip install pyzmq redis
+```
+  また、先ほどのインストールした oslo.messaging のバージョンを以下のコマンドで確認してください。
+```
+vagrant@vagrant:~$ pip show oslo.messaging
+```
+  もし oslo.messaging のバージョンが 5.10.0 の以下の場合、ここでの操作で [ZeroMQ ドライバのバグ](https://bugs.launchpad.net/oslo.messaging/+bug/1620543) を踏むため、以下の手順で最新版をビルドしてください。
+```
+vagrant@vagrant:~$ git clone https://github.com/openstack/oslo.messaging.git
+vagrant@vagrant:~$ cd oslo.messaging
+vagrant@vagrant:~/oslo.messaging$ sudo python setup.py install
 ```
 　ここで `ZeroMQ` ドライバに `Redis` が必要な理由を説明します。  
 
@@ -31,19 +41,19 @@ vagrant@vagrant:~$ sudo pip install pyzmq redis
 
 　また `Matchmaker` 自体がプラグイン機構 (Pluggable) になっており、多様なデータストアに対応が可能です。ただ本稿執筆時点で利用可能なプラグインが `Redis` 向けのプラグインしかないため、`Redis` サーバと `Redis` にアクセスするための Python パッケージをインストールしました。  
 
-　では実際に `ZeroMQ` ドライバを利用して、先ほどの RPC server/client のサンプルを実行します。  
-　念のため `RabbitMQ` を使わずに RPC が行えることを確認するために `RabbitMQ` を停止させます。  
+　では実際に `ZeroMQ` ドライバを利用して、先ほどの RPC server/client のサンプルを実行します。念のため `RabbitMQ` を使わずに RPC が行えることを確認するために `RabbitMQ` を停止させます。  
 ```
 vagrant@vagrant:~$ sudo service rabbitmq-server stop
 ```
+
 　まず `ZeroMQ` ドライバを使ってサーバを起動させます。`ZeroMQ` ドライバを使う場合には、次のように `--config-file` パラメータに `ZeroMQ` ドライバを使用する設定を記述したファイル `config/driver_zmq.conf` を指定します。  
 ```
-vagrant@vagrant:~/oslo-messaging-examples-master$ src/rpc_server.py --config-file config/driver_zmq.conf 
+vagrant@vagrant:~/oslo-messaging-examples$ src/rpc_server.py --config-file config/driver_zmq.conf 
 ```
 　次に `ZeroMQ` ドライバを使ってクライアントからサーバに対して RPC を実行します。クライアントも同様に `--config-file` パラメータに `ZeroMQ` ドライバ用設定ファイル `config/driver_zmq.conf` を指定します。   
 ```
-vagrant@vagrant:~/oslo-messaging-examples-master$ src/rpc_client.py --config-file config/driver_zmq.conf 
+vagrant@vagrant:~/oslo-messaging-examples$ src/rpc_client.py --config-file config/driver_zmq.conf 
 20
-vagrant@vagrant:~/oslo-messaging-examples-master$ 
+vagrant@vagrant:~/oslo-messaging-examples$ 
 ```
 　コード修正を行わず、設定の変更だけで `RabbitMQ` の場合と同様の結果が得られることを確認できました。  

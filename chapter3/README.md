@@ -18,7 +18,7 @@ $ vagrant ssh
 ```
 　まずは必要なパッケージのインストールを行います。  
 ```
-vagrant@vagrant:~$ sudo apt-get update; sudo apt-get install -y rabbitmq-server python-pip unzip
+vagrant@vagrant:~$ sudo apt-get update; sudo apt-get install -y rabbitmq-server python-pip unzip git
 ```
 　次に oslo.messaging と依存パッケージのインストールを行います。  
 ```
@@ -30,7 +30,6 @@ vagrant@vagrant:~$ sudo pip install oslo.messaging
 
 　次のコマンドでリポジトリの最新版を取得します。  
 ```
-vagrant@vagrant:~$ wget https://github.com/userlocalhost2000/oslo-messaging-examples/archive/master.zip
-vagrant@vagrant:~$ unzip master.zip 
+vagrant@vagrant:~$ git clone https://github.com/userlocalhost2000/draft-oslo.messaging.git
 ```
 　以上で、oslo.messaging を動かす環境が整いました。以降では、oslo.messaging をどのように使うかについてサンプルを用いて解説して行きます。  
