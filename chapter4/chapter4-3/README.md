@@ -1,5 +1,5 @@
 ### OpenStack (Nova) の利用例
-　ここで紹介した oslo.messaging の RPC 機能の使いどころを掴むため、oslo を最も利用している OpenStack がどのように利用しているかを見て行きます。
+　ここで紹介した oslo.messaging の RPC 機能の使いどころを掴むため、oslo を最も利用している OpenStack がどのように利用しているかを見て行きます。  
   
 　RPC はその名の通りプロセス間通信を実現する手法の一つですが、OpenStack では RPC 以外にも REST API によるプロセス間通信の仕組みを提供しています。OpenStack ではこれら 2 つの手法をどのように使い分けているのでしょうか。  
 
