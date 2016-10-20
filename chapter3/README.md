@@ -30,6 +30,6 @@ vagrant@vagrant:~$ sudo pip install oslo.messaging
 
 　次のコマンドでリポジトリの最新版を取得します。  
 ```
-vagrant@vagrant:~$ git clone https://github.com/userlocalhost2000/draft-oslo.messaging.git
+vagrant@vagrant:~$ git clone https://github.com/userlocalhost2000/oslo-messaging-examples.git
 ```
 　以上で、oslo.messaging を動かす環境が整いました。以降では、oslo.messaging をどのように使うかについてサンプルを用いて解説して行きます。  
