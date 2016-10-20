@@ -9,16 +9,6 @@ vagrant@vagrant:~$ sudo apt-get install -y redis-server libzmq-dev
 ```
 vagrant@vagrant:~$ sudo pip install pyzmq redis
 ```
-  また、先ほどのインストールした oslo.messaging のバージョンを以下のコマンドで確認してください。
-```
-vagrant@vagrant:~$ pip show oslo.messaging
-```
-  もし oslo.messaging のバージョンが 5.10.0 の以下の場合、ここでの操作で [ZeroMQ ドライバのバグ](https://bugs.launchpad.net/oslo.messaging/+bug/1620543) を踏むため、以下の手順で最新版をビルドしてください。
-```
-vagrant@vagrant:~$ git clone https://github.com/openstack/oslo.messaging.git
-vagrant@vagrant:~$ cd oslo.messaging
-vagrant@vagrant:~/oslo.messaging$ sudo python setup.py install
-```
 　ここで `ZeroMQ` ドライバに `Redis` が必要な理由を説明します。  
 
 　`ZeroMQ` ドライバでは `Matchmaker` と呼ばれる仕組みによって、動的に追加されたホストに対する `topic` 通信が行えるようになっています。  
